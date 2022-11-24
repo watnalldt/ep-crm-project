@@ -1,0 +1,48 @@
+<!-- Main Navigation -->
+{% load static %}
+
+<nav class="navbar navbar-expand-lg py-3 navbar-dark" style="background-color: #000000">
+  <div class="container">
+    <a href="#" class="navbar-brand">
+      <!-- Logo Image -->
+      <img src="{% static 'img/energy-portfolio-logo.png' %}" width="300px" height="130px" alt="Energy Portfolio Logo">
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+      <ul class="navbar-nav mb-lg-0 ms-auto">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'pages:home' %}"><i class="fa-solid fa-house"></i>&nbsp;Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  href="{% url 'pages:market_update' %}"><i class="fa-solid fa-file"></i>&nbsp;Market Update</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'pages:seamless_utilities' %}"><i class="fa-solid fa-bolt"></i>&nbsp;Seamless Utilities</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fa-solid fa-list"></i>&nbsp;Our Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'pages:partners' %}"><i class="fa-solid fa-handshake"></i>&nbsp;Our Partners</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'pages:contact_us' %}"><i class="fa-solid fa-paper-plane"></i>&nbsp;Contact Us</a>
+        </li>
+
+
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'users:login' %}"><i class="fa-solid fa-lock"></i>&nbsp;Login</a>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+  {% block nav-btn %}
+  {% endblock nav-btn %}
+</nav>
