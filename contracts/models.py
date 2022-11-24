@@ -110,7 +110,7 @@ class Contract(TimeStampedModel):
         return self.business_name
 
     @property
-    def Days_till(self):
+    def days_till(self):
         today = date.today()
         days_till = self.contract_end_date - today
         days_till_stripped = str(days_till).split(",", 1)[0]
