@@ -1,0 +1,32 @@
+# Django
+django
+django-admin-autocomplete-filter
+django-admin-rangefilter
+django-browser-reload
+django-environ
+django-debug-toolbar
+django-extensions
+django-import-export
+djangorestframework
+django-filter
+django-simple-history
+django-recaptcha
+crispy-bootstrap5
+xhtml2pdf
+pillow
+ipython
+psycopg2
+whitenoise
+# Redis
+django-redis
+redis
+hiredis
+# Sentry
+sentry-sdk
+# Silk
+django-silk
+# Tests
+coverage
+pytest
+pytest-sugar
+pytest-django
