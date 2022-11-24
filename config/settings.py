@@ -38,13 +38,28 @@ BROWSER_RELOAD = env("BROWSER_RELOAD")
 
 # Application definition
 
-INSTALLED_APPS = [
+DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
+]
+
+THIRD_PARTY_APPS = [
+    "import_export",
+    "django_extensions",
+    "crispy_forms",
+    "crispy_bootstrap5",
+    "django_filters",
+    "admin_auto_filters",
+    "rangefilter",
+    "simple_history",
+]
+
+PROJECT_APPS = [
     "users.apps.UsersConfig",
     "account_managers.apps.AccountManagersConfig",
     "client_managers.apps.ClientManagersConfig",
@@ -52,6 +67,8 @@ INSTALLED_APPS = [
     "contracts.apps.ContractsConfig",
     "utilities.apps.UtilitiesConfig",
 ]
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
