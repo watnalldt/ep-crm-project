@@ -15,12 +15,30 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from django.urls import include, path
 
+from core import views
+
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("ep_crm_portal/", admin.site.urls),
     path("", include("pages.urls")),
     path("users/", include("users.urls")),
+    path("password_reset", views.password_reset_request, name="password_reset"),
+    path(
+        "reset/<uidb64>/<token>/",
+        auth_views.PasswordResetConfirmView.as_view(
+            template_name="passwords/password_reset_confirm.html"
+        ),
+        name="password_reset_confirm",
+    ),
+    path(
+        "reset/done/",
+        auth_views.PasswordResetCompleteView.as_view(
+            template_name="passwords/password_reset_complete.html"
+        ),
+        name="password_reset_complete",
+    ),
 ]
 if settings.DEBUG:
     urlpatterns += [
