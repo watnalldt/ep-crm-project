@@ -176,3 +176,19 @@ STATICFILES_FINDERS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 25000
+EMAIL_HOST = "0.0.0.0"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_PORT = "1025"
+ADMINS = [x.split(":") for x in env.list("DJANGO_ADMINS")]
+MANAGERS = ADMINS
+DEFAULT_FROM_EMAIL = env(
+    "DJANGO_DEFAULT_FROM_EMAIL",
+    default="Enquiries <david@energyportfolio.co.uk>",
+)
+
+# https://docs.djangoproject.com/en/dev/ref/settings/#server-email
+SERVER_EMAIL = env("DJANGO_SERVER_EMAIL", default=DEFAULT_FROM_EMAIL)
+EMAIL_HOST_USER = SERVER_EMAIL
+RECIPIENT_ADDRESS = env("RECIPIENT_ADDRESS")

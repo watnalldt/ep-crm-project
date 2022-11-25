@@ -6,6 +6,7 @@ django-browser-reload
 django-environ
 django-debug-toolbar
 django-extensions
+Werkzeug
 django-import-export
 djangorestframework
 django-filter
@@ -30,3 +31,4 @@ coverage
 pytest
 pytest-sugar
 pytest-django
+pyOpenSSL

@@ -21,7 +21,7 @@
               {{ form | crispy }}
               <div class="text-center">
                 <input class="btn btn-success btn-sm mt-3" type="submit" value="Enter" id="btn-enter">
-                <a href="" class="btn btn-danger btn-sm id=btn-password mt-3">Password Reset</a>
+                <a href="{% url 'password_reset'  %}" class="btn btn-danger btn-sm id=btn-password mt-3">Password Reset</a>
               </div>
             </form>
           </div>
