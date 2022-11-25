@@ -1,0 +1,22 @@
+{% extends '_partials/dashboards/portal_dashboard_base.html' %}
+
+{% block html_title %}EP | Page not found (404){% endblock %}
+
+
+
+<!-- Body Content -->
+{% block content %}
+  <div class="text-center error">
+    <div class="text-center text-danger error-body">
+      {%  block error-body %}
+        <span class="text-danger mb-5 error-404">404</span>
+        <h5 class="text-danger mb-3">THE PAGE YOU HAVE ENTERED IS NOT AVAILABLE</h5>
+        <h6 class="text-dark" style="line-height: 1.5em;">Probably you have accessed the wrong contract number. </h6>
+        <h6 class="text-dark" style="line-height: 1.5em;">Please return to your contract list or contact our <a href="mailto:">Technical Support</a></h6>
+
+
+
+        </div>
+        </div>
+      {% endblock error-body %}
+{% endblock content %}
