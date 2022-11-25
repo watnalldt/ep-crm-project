@@ -44,9 +44,9 @@ def password_reset_request(request):
                         msg = EmailMultiAlternatives(
                             subject,
                             text_content,
-                            "Website <admin@energyportfolio.co.uk>",
+                            "Website <support@energyportfolio.co.uk>",
                             [user.email],
-                            headers={"Reply-To": "admin@energyportfolio.co.uk"},
+                            headers={"Reply-To": "support@energyportfolio.co.uk"},
                         )
                         msg.attach_alternative(html_content, "text/html")
                         msg.send()

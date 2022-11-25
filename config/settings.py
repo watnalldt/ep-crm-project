@@ -178,9 +178,9 @@ STATICFILES_FINDERS = [
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 25000
-EMAIL_HOST = "0.0.0.0"
+EMAIL_HOST = env("EMAIL_HOST")
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_PORT = "1025"
+EMAIL_PORT = env("EMAIL_PORT")
 ADMINS = [x.split(":") for x in env.list("DJANGO_ADMINS")]
 MANAGERS = ADMINS
 DEFAULT_FROM_EMAIL = env(
