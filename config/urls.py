@@ -25,6 +25,10 @@ urlpatterns = [
     path("ep_crm_portal/", admin.site.urls),
     path("", include("pages.urls")),
     path("users/", include("users.urls")),
+    path("account_managers/", include("account_managers.urls")),
+    path("client_managers/", include("client_managers.urls")),
+    path("clients/", include("clients.urls")),
+    path("contracts/", include("contracts.urls")),
     path("password_reset", views.password_reset_request, name="password_reset"),
     path(
         "reset/<uidb64>/<token>/",

@@ -1,0 +1,83 @@
+{% extends '_partials/dashboards/portal_dashboard_base.html' %}
+
+{% block content %}
+
+
+
+  <div class="container mt-4">
+
+
+    <h5> <div class="icon icon-shape bg-success text-white rounded-circle shadow">
+      <i class="fa-solid fa-user"></i>
+    </div>
+      {{ request.user.email }}
+    </h5>
+    {% if request.user.email == "martin@energyportfolio.co.uk" %}
+
+
+
+      {% include 'contracts/contract_dashboard.html' %}
+    {% elif request.user.email == "mark.borg@energyportfolio.co.uk" %}
+      {% include 'contracts/contract_dashboard.html' %}
+
+
+    {% endif %}
+    <br>
+    <div class="row mt-2">
+      <div class="col-md-12">
+        <div class="card-table">
+          <div class="card-header card-header-color">
+            <h5 class="text-center">&nbsp; <div class="icon icon-shape bg-success text-white rounded-circle shadow">
+              <i class="fa-solid fa-people-group"></i>
+            </div>&nbsp;Clients List</h5>
+
+
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table id="example" class="table" style="width:100%">
+                <thead>
+                  <tr>
+
+                    <th></th>
+
+                    <th></th>
+
+                  </tr>
+
+                </thead>
+
+                <tbody>
+                  {% if client_list %}
+
+
+                    {% for client in client_list %}
+                      <tr>
+
+                        <td>{{ client.client }}</td>
+
+                        <td> <a href="{{ client.get_absolute_url }}" class="btn btn-success text-center"><i class="fa-solid fa-plus"></i></a></td>
+
+                      </tr>
+                    {% endfor %}
+
+                  {% endif %}
+
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
+{% block extra_js %}
+  <script>
+    $(document).ready(function () {
+      $('#example').DataTable();
+    });
+  </script>
+{% endblock extra_js %}

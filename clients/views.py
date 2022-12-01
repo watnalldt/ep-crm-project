@@ -1,6 +1,8 @@
+from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.mail import BadHeaderError, send_mail
+from django.core.mail import BadHeaderError, EmailMessage
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import get_template
@@ -30,13 +32,6 @@ class ClientDetailView(LoginRequiredMixin, HTMLTitleMixin, DetailView):
     def get_queryset(self):
         return Client.objects.filter(account_manager__account_manager=self.request.user)
 
-    # def get_queryset(self, *args, **kwargs):
-    #     return (
-    #         super(ClientDetailView, self)
-    #         .get_queryset(*args, **kwargs)
-    #         .filter(account_manager__account_manager=self.request.user)
-    #     )
-
 
 @method_decorator([never_cache], name="dispatch")
 class ContractDetailView(LoginRequiredMixin, HTMLTitleMixin, DetailView):
@@ -51,13 +46,6 @@ class ContractDetailView(LoginRequiredMixin, HTMLTitleMixin, DetailView):
         return Contract.objects.filter(
             client__account_manager__account_manager=self.request.user
         )
-
-    # def get_queryset(self, *args, **kwargs):
-    #     return (
-    #         super(ContractDetailView, self)
-    #         .get_queryset(*args, **kwargs)
-    #         .filter(client__account_manager__account_manager=self.request.user)
-    #     )
 
 
 @login_required(login_url="/users/login/")
@@ -109,22 +97,32 @@ def meter_reading(request, *args, **kwargs):
                 "meter_serial_number": form.cleaned_data["meter_serial_number"],
                 "utility_type": form.cleaned_data["utility_type"],
                 "supplier": form.cleaned_data["supplier"],
-                "meter_read": form.cleaned_data["meter_read"],
+                "meter_reading": form.cleaned_data["meter_reading"],
                 "meter_reading_date": form.cleaned_data["meter_reading_date"],
             }
 
             message = "\n".join(data.values())
 
             try:
-                send_mail(
+                mail = EmailMessage(
                     subject,
                     message,
-                    "josh@eneryportdolio.co.uk",
+                    settings.EMAIL_HOST_USER,
                     ["josh@energyportfolio.co.uk"],
                 )
+                if "attachment" in request.FILES:
+                    attachment = request.FILES.get("attachment")
+                    mail.attach(
+                        attachment.name, attachment.read(), attachment.content_type
+                    )
+                    mail.send()
+                else:
+                    mail.send()
+
             except BadHeaderError:
                 return HttpResponse("Invalid header found.")
-            return redirect("pages:home")
+            messages.success(request, "Your meter reading has been received.")
+            return redirect("client_managers:dashboard")
     form = MeterForm(
         initial={
             "from_email": request.user.email,
