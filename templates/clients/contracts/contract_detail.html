@@ -1,0 +1,7 @@
+
+{% if contract.seamless == True %}
+  {% include '_partials/contracts/seamless_contracts.html' %}
+{% elif contract.non_seamless == True %}
+  {% include '_partials/contracts/non_seamless_contracts.html' %}
+
+{% endif %}

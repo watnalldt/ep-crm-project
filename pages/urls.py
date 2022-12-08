@@ -17,6 +17,7 @@ urlpatterns = [
     ),
     path("our_partners", views.PartnersView.as_view(), name="partners"),
     path("our_services", views.OurServicesView.as_view(), name="our_services"),
+    path("contact_us", views.contact_us, name="contact_us"),
     path(
         "complaints_policy",
         views.ComplaintsPolicyView.as_view(),

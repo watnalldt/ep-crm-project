@@ -133,7 +133,6 @@ class ContractAdmin(ImportExportModelAdmin):
         "contract_end_date",
         "is_ooc",
         "is_directors_approval",
-        "vat",
     )
     fieldsets = (
         (

@@ -8,7 +8,9 @@ from .models import Contract
 
 @method_decorator([never_cache], name="dispatch")
 class ContractDashboard(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
-    template_name = "contracts/contract_dashboard.html"
+    template_name = (
+        "contracts/../templates/_partials/dashboards/contract_dashboard.html"
+    )
     login_url = "/users/login/"
 
     def test_func(self):

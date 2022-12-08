@@ -2,22 +2,26 @@
 django
 django-admin-autocomplete-filter
 django-admin-rangefilter
+django-auto-logout
 django-browser-reload
 django-environ
 django-debug-toolbar
 django-extensions
 Werkzeug
+django-grappelli
 django-import-export
 djangorestframework
 django-filter
 django-simple-history
 django-recaptcha
+django-user-visit
 crispy-bootstrap5
 xhtml2pdf
 pillow
 ipython
 psycopg2
 whitenoise
+pandas
 # Redis
 django-redis
 redis

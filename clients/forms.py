@@ -15,10 +15,12 @@ class MeterForm(forms.Form):
         required=True,
         label="Meter Read single or day/night. "
         "If day/night rate, separate the values with / e.g. 000000/000000. "
-        "Please fill this in even if attaching a photo. " 
+        "Please fill this in even if attaching a photo. ",
     )
     meter_reading_date = forms.CharField(
         widget=forms.widgets.DateTimeInput(format="%d/%m/%Y"),
         initial=datetime.date.today,
     )
-    attachment = forms.FileField(required=False, label="You can also upload a photo of your meter reading" )
+    attachment = forms.FileField(
+        required=False, label="Optionally upload a photo of your meter reading"
+    )

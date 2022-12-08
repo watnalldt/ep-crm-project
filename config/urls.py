@@ -21,7 +21,13 @@ from django.views import defaults as default_views
 
 from core import views
 
+admin.site.site_header = "Energy Portfolio Contract Management"
+admin.site.site_title = "Energy Portfolio CRM Portal"
+admin.site.index_title = "Energy Portfolio Contract Management"
+
+
 urlpatterns = [
+    path("grappelli/", include("grappelli.urls")),  # grappelli URLS
     path("ep_crm_portal/", admin.site.urls),
     path("", include("pages.urls")),
     path("users/", include("users.urls")),
@@ -29,6 +35,7 @@ urlpatterns = [
     path("client_managers/", include("client_managers.urls")),
     path("clients/", include("clients.urls")),
     path("contracts/", include("contracts.urls")),
+    # Password Management
     path("password_reset", views.password_reset_request, name="password_reset"),
     path(
         "reset/<uidb64>/<token>/",

@@ -2,7 +2,7 @@
 
 {% block content %}
 
-
+  {{ redirect_to_login_immediately }}
 
   <div class="container mt-4">
 
@@ -16,9 +16,9 @@
 
 
 
-      {% include 'contracts/contract_dashboard.html' %}
+      {% include '_partials/dashboards/contract_dashboard.html' %}
     {% elif request.user.email == "mark.borg@energyportfolio.co.uk" %}
-      {% include 'contracts/contract_dashboard.html' %}
+      {% include '_partials/dashboards/contract_dashboard.html' %}
 
 
     {% endif %}

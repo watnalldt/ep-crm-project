@@ -1,0 +1,66 @@
+{% extends '_partials/dashboards/client_dashboard_base.html' %}
+{% load i18n %}
+{% block html_title %} {{ request.user.email }} | {{ html_title }}{% endblock html_title %}
+
+{% block content %}
+
+  <div class="container">
+    <h5 class="text-center" style="margin-top: 20px;">{{ request.user.email }} All Contracts</h5>
+    <hr>
+    <table id="client_managers_dashboard" class="table table-bordered" style="text-center">
+      <thead class ="table-success">
+        <tr>
+          <td>Business Name</td>
+          <td>MPAN/MPR</td>
+          <td>Meter Serial Number</td>
+          <td>EAC</td>
+          <td>Contract End Date</td>
+          <td>View</td>
+        </tr>
+      </thead>
+      <tbody>
+        {% if contract_list  %}
+
+
+          {% for contract in contract_list %}
+            <tr>
+              <td> {{ contract.business_name }}</td>
+              <td> {{ contract.mpan_mpr }} </td>
+              <td> {{ contract.meter_serial_number }}</td>
+              <td> {{ contract.eac }}</td>
+              <td>{{ contract.contract_end_date }}</td>
+              <td><a href="{% url 'client_managers:contract_detail' contract.pk %}" class="btn btn-success text-center"><i class="fa-solid fa-eye"></i></a></td>
+
+            </tr>
+          {% endfor %}
+
+        {% endif %}
+
+      </tbody>
+    </table>
+  </div>
+  <br>
+{% endblock content %}
+
+{% block extra_js %}
+  <script>
+    $(document).ready(function() {
+      $('#client_managers_dashboard').DataTable(
+        {
+          "dom": '<"dt-buttons"Bf><"clear">lirtp',
+          "paging": true,
+          "autoWidth": true,
+          "columnDefs": [
+            { "orderable": false, "targets": 5 }
+          ],
+          "buttons": [
+            'colvis',
+            'excelHtml5',
+            'pdfHtml5',
+            'print'
+          ]
+        });
+    });
+
+  </script>
+{% endblock extra_js %}

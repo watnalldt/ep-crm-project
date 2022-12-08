@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 
 import environ
@@ -42,6 +43,7 @@ SENTRY_ENABLED = ((bool, True),)
 # Application definition
 
 DJANGO_APPS = [
+    "grappelli",  # grappelli admin
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -60,6 +62,8 @@ THIRD_PARTY_APPS = [
     "admin_auto_filters",
     "rangefilter",
     "simple_history",
+    "captcha",
+    "user_visit",
 ]
 
 PROJECT_APPS = [
@@ -82,6 +86,9 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_auto_logout.middleware.auto_logout",  # Auto logout
+    "user_visit.middleware.UserVisitMiddleware",
+    "simple_history.middleware.HistoryRequestMiddleware",
 ]
 
 # Enable the debug toolbar only in DEBUG mode.
@@ -108,6 +115,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "django_auto_logout.context_processors.auto_logout_client",  # Auto Logout
             ],
         },
     },
@@ -184,6 +192,9 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 25000
 EMAIL_HOST = env("EMAIL_HOST")
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_PORT = env("EMAIL_PORT")
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = env("EMAIL_USE_TLS")
 ADMINS = [x.split(":") for x in env.list("DJANGO_ADMINS")]
 MANAGERS = ADMINS
 DEFAULT_FROM_EMAIL = env(
@@ -193,7 +204,7 @@ DEFAULT_FROM_EMAIL = env(
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#server-email
 SERVER_EMAIL = env("DJANGO_SERVER_EMAIL", default=DEFAULT_FROM_EMAIL)
-EMAIL_HOST_USER = SERVER_EMAIL
+
 RECIPIENT_ADDRESS = env("RECIPIENT_ADDRESS")
 
 # CACHES
@@ -223,3 +234,16 @@ if env("SENTRY_ENABLED"):
         # django.contrib.auth) you may enable sending PII data.
         send_default_pii=True,
     )
+
+# Recaptcha
+RECAPTCHA_PUBLIC_KEY = env("RECAPTCHA_PUBLIC_KEY")
+RECAPTCHA_PRIVATE_KEY = env("RECAPTCHA_PRIVATE_KEY")
+
+# Auto Logout
+AUTO_LOGOUT = {
+    "IDLE_TIME": timedelta(minutes=25),
+    "MESSAGE": "The session has expired. Please login again to  continue.",
+    "REDIRECT_TO_LOGIN_IMMEDIATELY": True,
+}
+
+GRAPPELLI_ADMIN_TITLE = "Energy Portfolio Contract Management"

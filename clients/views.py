@@ -101,8 +101,10 @@ def meter_reading(request, *args, **kwargs):
                 "meter_reading_date": form.cleaned_data["meter_reading_date"],
             }
 
-            message = "\n".join(data.values())
-
+            # message = "\n".join(data.values())
+            message = get_template(
+                "clients/contracts/meter_reading_submission.html"
+            ).render(data)
             try:
                 mail = EmailMessage(
                     subject,
@@ -115,8 +117,10 @@ def meter_reading(request, *args, **kwargs):
                     mail.attach(
                         attachment.name, attachment.read(), attachment.content_type
                     )
+                    mail.content_subtype = "html"
                     mail.send()
                 else:
+                    mail.content_subtype = "html"
                     mail.send()
 
             except BadHeaderError:
