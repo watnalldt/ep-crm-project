@@ -18,12 +18,17 @@
     <!-- DataTables css -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.1/cr-1.5.6/datatables.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/datatables.min.css"/>
-
-
     <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.3/css/fixedHeader.dataTables.min.css">
 
-
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicons/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'favicons/site.webmanifest' %}">
     <title>{% block html_title %}{% endblock html_title %}</title>
+    {% block metadescription %}
+
+    {% endblock %}
+
   </head>
   <body>
     <header id="pageHead">
@@ -34,9 +39,6 @@
     </header>
     <!-- Main Content -->
     <main id="pageMain">
-      <div class="container">
-        {% include '_partials/messages.html' %}
-      </div>
 
       <!-- Page Content used in other pages -->
       {% block content %}

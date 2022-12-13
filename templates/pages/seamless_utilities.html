@@ -1,6 +1,9 @@
 {% extends '_partials/base.html' %}
 {% load static %}
-
+{% block html_title %}{{ html_title}}{% endblock html_title %}
+{% block metadescription %}
+  <meta name="description" content="Seamless Utilities is a complete on-the-cloud Property Management Platform that manages all utilities invoices- Removing the manual intervention of processing thousands of paper invoices per year">
+{% endblock %}
 {% block content %}
 
   <section class="seamless-utilities mt-4 align-center">

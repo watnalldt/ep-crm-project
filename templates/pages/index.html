@@ -1,6 +1,20 @@
 {% extends '_partials/base.html' %}
 {% load static %}
+{% block html_title %}{{ html_title}}|Effectively Managing Energy Solutions{% endblock html_title %}
+{% block metadescription %}
+  <meta name="description" content="Energy Portfolio is a one stop utility management company priding itself on transparency and ethical conduct. We leverage the combined purchasing power of all our clients to deliver significant savings across a selection of flexible tariffs for managing agents.">
+{% endblock %}
+
+
 {% block content %}
+  {% for message in messages %}
+    <!-- Success Alert -->
+    <div id="message_timeout" class="alert {{ message.tags }} alert-success alert-dismissible d-flex align-items-center fade show">
+      <i class="fa-solid fa-circle-check"></i>&nbsp;{{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+
+    </div>
+  {% endfor %}
   <div class="row">
     <img src="{% static 'img/hero.png' %}" class="img-fluid " alt="Energy Portfolio Hero Image">
   </div>
@@ -129,3 +143,7 @@
 
 
 {% endblock content %}
+
+{% block extra_js %}
+  <script src="{% static 'js/script.js' %}"></script>
+{% endblock extra_js %}

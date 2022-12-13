@@ -3,6 +3,7 @@ django
 django-admin-autocomplete-filter
 django-admin-rangefilter
 django-auto-logout
+django-axes
 django-browser-reload
 django-environ
 django-debug-toolbar

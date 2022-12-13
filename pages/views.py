@@ -27,7 +27,7 @@ class SeamlessUtilitiesView(HTMLTitleMixin, TemplateView):
 
 class PartnersView(HTMLTitleMixin, TemplateView):
     template_name = "pages/our_partners.html"
-    html_title = "Energy Portfolio Partners"
+    html_title = "Energy Portfolio Our Partners"
 
 
 class OurServicesView(HTMLTitleMixin, TemplateView):

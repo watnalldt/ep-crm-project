@@ -4,21 +4,21 @@
 
 {% block content %}
 
-<h5 class="text-center mt-3">Current Contract Details:&nbsp{{ contract.site_address }}</h5>
-    <hr>
+  <h5 class="text-center mt-3">Current Contract Details:&nbsp{{ contract.site_address }}</h5>
+  <hr>
 
   <div class="container">
 
     <div class="row row-cols-3">
-<div class="col">{% if contract.account_number == None %}
-          <p>{% trans "" %}</p>
-        {% else %}
-          <p>Account Number: {{ contract.account_number }}</p>
-{% endif %}
-   <p>Company Reg Number: {{ contract.company_reg_number }}</p>
- <p>Supplier: {{ contract.supplier }}</p>
+      <div class="col">{% if contract.account_number == None %}
+        <p>{% trans "" %}</p>
+      {% else %}
+        <p>Account Number: {{ contract.account_number }}</p>
+      {% endif %}
+        <p>Company Reg Number: {{ contract.company_reg_number }}</p>
+        <p>Supplier: {{ contract.supplier }}</p>
         <p>Utility Type: {{ contract.utility }}</p>
-{% if contract.vat == None %}
+        {% if contract.vat == None %}
           <p>{% trans 'Vat Rate: 0' %}</p>
         {% else %}
           <p>VAT Rate: {{ contract.vat }}%</p>
@@ -32,23 +32,23 @@
             <p>Days Left On Contract: {{ contract.days_till }}
             </p>
         {% endif %}
-</div>
+      </div>
 
-<div class="col">{% if contract.smart_meter == None %}
-          <p>{% trans 'No Smart Meter' %}</p>
-        {% else%}
-          <p>Smart Meter: {{ contract.smart_meter }}</p>
-        {% endif %}
+      <div class="col">{% if contract.smart_meter == None %}
+        <p>{% trans 'No Smart Meter' %}</p>
+      {% else%}
+        <p>Smart Meter: {{ contract.smart_meter }}</p>
+      {% endif %}
         <p>Meter Serial Number: {{ contract.meter_serial_number }}</p>
         <p>MPAN/MPR: {{ contract.mpan_mpr }}</p>
- <p>Top Line: {{ contract.top_line }}</p>
+        <p>Top Line: {{ contract.top_line }}</p>
         <p>EAC: {{ contract.eac }}</p>
 
         <p>Day Consumption: {{ contract.day_consumption }}</p>
         <p>Night Consumption: {{ contract.night_consumption }}</p>
-</div>
-<div class="col">
-  <p>Unit Rate 1: {{ contract.unit_rate_1 }}</p>
+      </div>
+      <div class="col">
+        <p>Unit Rate 1: {{ contract.unit_rate_1 }}</p>
         <p>Unit Rate 2: {{ contract.unit_rate_2 }}</p>
         <p>Unit Rate 3: {{ contract.unit_rate_3 }}</p>
         <p>Feed In Tariff: {{ contract.feed_in_tariff }}</p>
@@ -57,21 +57,21 @@
         <p>Pence per Kilowatt: {{ contract.pence_per_kilowatt }}</p>
         <p class>Day Kilowatt Hour Rate: {{ contract.day_kilowatt_hour_rate }}</p>
         <p class>Night Rate: {{ contract.night_rate }}</p>
-</div>
+      </div>
     </div>
     <hr>
     <h4 class="text-center mb-3">Future Contract Details</h4>
     <div class="row row-cols-4">
 
 
-        <p>Future Contract Start Date: {{ contract_future_contract_start_date }}</p>
-        <p>Future Unit Rate 1: {{ contract_future_unit_rate_1 }}</p>
-        <p>Future Unit Rate 2: {{ contract_future_unit_rate_2 }}</p>
-        <p>Future Unit Rate 3: {{ contract_future_unit_rate_3 }}</p>
+      <p>Future Contract Start Date: {{ contract_future_contract_start_date }}</p>
+      <p>Future Unit Rate 1: {{ contract_future_unit_rate_1 }}</p>
+      <p>Future Unit Rate 2: {{ contract_future_unit_rate_2 }}</p>
+      <p>Future Unit Rate 3: {{ contract_future_unit_rate_3 }}</p>
 
 
     </div>
-</div>
+  </div>
   <div class="row mb-4 text-center">
 
     <a href="{% url 'clients:contract_pdf_view' contract.id %}" target="_blank"><button class="btn btn-secondary btn-sm mt-3">Download PDF</button></a>

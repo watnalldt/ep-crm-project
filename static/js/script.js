@@ -1,3 +1,6 @@
-$(".alert").delay(5000).slideUp(200, function () {
-        $(this).alert('close');
-    });
+var message_timeout = document.getElementById('message_timeout');
+setTimeout(function() {
+    message_timeout.style.display = 'none';
+
+
+}, 5000);

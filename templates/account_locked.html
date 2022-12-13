@@ -1,0 +1,18 @@
+{% extends '_partials/base.html' %}
+{% block html_title %} Energy Portfolio | Account Locked {% endblock html_title %}
+{% block content %}
+  <br><br>
+  <div class="container bg-white shadow-md p-5 form-layout">
+    <div class="text-center">
+      <i class="fa-solid fa-lock fa-4x"></i>
+      <br><br>
+      <h4 class="text-uppercase">Account Locked</h4>
+      <br>
+      <p>You have been locked out of your account due to multiple failed login attempts</p>
+      <p>You may re-attempt to login to your account after the expiry period</p>
+      <br>
+      <a class="btn btn-info" type="button"  href="{% url 'pages:home' %}"> <i class="fa fa-user" aria-hidden="true"></i> &nbsp; Return to Home Page </a>
+    </div>
+  </div>
+
+{% endblock content %}

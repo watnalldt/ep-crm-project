@@ -64,6 +64,7 @@ THIRD_PARTY_APPS = [
     "simple_history",
     "captcha",
     "user_visit",
+    "axes",
 ]
 
 PROJECT_APPS = [
@@ -87,8 +88,9 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django_auto_logout.middleware.auto_logout",  # Auto logout
-    "user_visit.middleware.UserVisitMiddleware",
-    "simple_history.middleware.HistoryRequestMiddleware",
+    "user_visit.middleware.UserVisitMiddleware",  # User visit
+    "simple_history.middleware.HistoryRequestMiddleware",  # History
+    "axes.middleware.AxesMiddleware",  # Axes
 ]
 
 # Enable the debug toolbar only in DEBUG mode.
@@ -155,7 +157,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = "users.CustomUser"
 LOGOUT_REDIRECT_URL = "users:login"
-AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
+AUTHENTICATION_BACKENDS = [
+    # AxesStandaloneBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
+    "axes.backends.AxesStandaloneBackend",
+    # Django ModelBackend is the default authentication backend.
+    "django.contrib.auth.backends.ModelBackend",
+]
 SITE_ID = 1
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -241,9 +248,15 @@ RECAPTCHA_PRIVATE_KEY = env("RECAPTCHA_PRIVATE_KEY")
 
 # Auto Logout
 AUTO_LOGOUT = {
-    "IDLE_TIME": timedelta(minutes=25),
+    "IDLE_TIME": timedelta(minutes=1),
     "MESSAGE": "The session has expired. Please login again to  continue.",
     "REDIRECT_TO_LOGIN_IMMEDIATELY": True,
 }
 
 GRAPPELLI_ADMIN_TITLE = "Energy Portfolio Contract Management"
+
+# axes configuration settings
+AXES_FAILURE_LIMIT: 3  # How many times a user can fail to log in
+AXES_COOLOFF_TIME: 2  # How long before a user can fail to log in
+AXES_RESET_ON_SUCCESS = True  # Reset failed login attempts
+AXES_LOCKOUT_TEMPLATE = "account_locked.html"

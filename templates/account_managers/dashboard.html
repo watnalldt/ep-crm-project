@@ -34,50 +34,52 @@
 
           </div>
           <div class="card-body">
-            <div class="table-responsive">
-              <table id="example" class="table" style="width:100%">
-                <thead>
-                  <tr>
 
-                    <th></th>
+            <table id="example" class="display compact nowrap" style="width:100%">
+              <thead>
+                <tr>
 
-                    <th></th>
+                  <th></th>
 
-                  </tr>
+                  <th></th>
 
-                </thead>
+                </tr>
 
-                <tbody>
-                  {% if client_list %}
+              </thead>
 
-
-                    {% for client in client_list %}
-                      <tr>
-
-                        <td>{{ client.client }}</td>
-
-                        <td> <a href="{{ client.get_absolute_url }}" class="btn btn-success text-center"><i class="fa-solid fa-plus"></i></a></td>
-
-                      </tr>
-                    {% endfor %}
-
-                  {% endif %}
+              <tbody>
+                {% if client_list %}
 
 
-                </tbody>
-              </table>
-            </div>
+                  {% for client in client_list %}
+                    <tr>
+
+                      <td>{{ client.client }}</td>
+
+                      <td> <a href="{{ client.get_absolute_url }}" class="btn btn-success text-center"><i class="fa-solid fa-plus"></i></a></td>
+
+                    </tr>
+                  {% endfor %}
+
+                {% endif %}
+
+
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+
 {% endblock content %}
 {% block extra_js %}
   <script>
     $(document).ready(function () {
-      $('#example').DataTable();
+      var table = $('#example').DataTable( {
+        responsive: true
+      });
     });
   </script>
 {% endblock extra_js %}
