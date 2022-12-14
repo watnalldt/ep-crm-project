@@ -25,6 +25,7 @@ env = environ.Env(
     DEBUG=(bool, False),
     DEBUG_TOOLBAR=(bool, False),
     BROWSER_RELOAD=(bool, False),
+    SENTRY_ENABLED=(bool, True),
 )
 env.read_env(str(BASE_DIR / ".env"))
 
@@ -37,7 +38,7 @@ ALLOWED_HOSTS: list[str] = env("ALLOWED_HOSTS")
 DEBUG = env("DEBUG")
 DEBUG_TOOLBAR = env("DEBUG_TOOLBAR")
 BROWSER_RELOAD = env("BROWSER_RELOAD")
-SENTRY_ENABLED = ((bool, True),)
+
 
 
 # Application definition
@@ -80,7 +81,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware", # Whitenoise
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -155,8 +156,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Custom User Model
 AUTH_USER_MODEL = "users.CustomUser"
 LOGOUT_REDIRECT_URL = "users:login"
+
+# Authentication
 AUTHENTICATION_BACKENDS = [
     # AxesStandaloneBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
     "axes.backends.AxesStandaloneBackend",
@@ -174,7 +178,7 @@ TIME_ZONE = "Europe/London"
 USE_I18N = True
 
 USE_TZ = True
-
+# UK Time Format
 DATE_INPUT_FORMATS = ("%d/%m/%Y", "%d-%m-%Y")
 
 
@@ -196,6 +200,7 @@ STATICFILES_FINDERS = [
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 25000
+# Email Settings
 EMAIL_HOST = env("EMAIL_HOST")
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_PORT = env("EMAIL_PORT")
@@ -227,6 +232,7 @@ CACHES = {
 }
 CACHE_TTL = 60 * 5
 
+# SENTRY
 if env("SENTRY_ENABLED"):
     sentry_sdk.init(
         dsn=env("SENTRY_DSN"),
@@ -256,7 +262,10 @@ AUTO_LOGOUT = {
 GRAPPELLI_ADMIN_TITLE = "Energy Portfolio Contract Management"
 
 # axes configuration settings
-AXES_FAILURE_LIMIT: 3  # How many times a user can fail to log in
-AXES_COOLOFF_TIME: 2  # How long before a user can fail to log in
-AXES_RESET_ON_SUCCESS = True  # Reset failed login attempts
-AXES_LOCKOUT_TEMPLATE = "account_locked.html"
+AXES_FAILURE_LIMIT=3 # How many times a user can fail to log in
+AXES_COOLOFF_TIME = timedelta(minutes=10) # How long before a user can fail to log in
+AXES_LOCK_OUT_BY_COMBINATION_USER_AND_IP = True
+# AXES_ONLY_USER_FAILURES=True # Block only on username
+AXES_RESET_ON_SUCCESS = True # Reset failed login attempts after successful login
+AXES_LOCKOUT_TEMPLATE = 'account_locked.html'
+AXES_RESET_COOL_OFF_ON_FAILURE_DURING_LOCKOUT = False
