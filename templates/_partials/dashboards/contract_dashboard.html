@@ -21,8 +21,11 @@
           <li>Seamless Contracts: {% total_seamless_contracts %}</li>
           <li>Non Seamless Contracts: {% total_non_seamless_contracts %}</li>
           <li> Total Contracts OOC: {% total_ooc_contracts %}</li>
-          <li> Total Contracts Under Objection: {% total_under_objection_contracts %}</li>
-          <a href="{% url 'contracts:directors_approval_list' %}"> <li>Requiring Directors Approval: {% total_directors_approval_contracts %} <br></li></a>
+          <li>EAC Value: {% total_contract_eac_value %}</li>
+          <li> Total Contracts Under Objection: {% total_under_objection_outstanding_contracts %}</li>
+          <li>EAC Value Contracts Under Objection: {% total_value_under_objection_outstanding_contracts %}</li>
+          <li> <a href="{% url 'contracts:directors_approval_list' %}">Requiring Directors Approval: {% total_directors_approval_contracts %} <br></a></li>
+
 
         </ul>
       </div>

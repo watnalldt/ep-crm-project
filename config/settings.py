@@ -27,7 +27,7 @@ env = environ.Env(
     BROWSER_RELOAD=(bool, False),
     SENTRY_ENABLED=(bool, True),
 )
-env.read_env(str(BASE_DIR / ".env"))
+env.read_env(str(BASE_DIR / ".env.development"))
 
 
 SECRET_KEY = env("SECRET_KEY")
@@ -38,7 +38,6 @@ ALLOWED_HOSTS: list[str] = env("ALLOWED_HOSTS")
 DEBUG = env("DEBUG")
 DEBUG_TOOLBAR = env("DEBUG_TOOLBAR")
 BROWSER_RELOAD = env("BROWSER_RELOAD")
-
 
 
 # Application definition
@@ -75,13 +74,14 @@ PROJECT_APPS = [
     "clients.apps.ClientsConfig",
     "contracts.apps.ContractsConfig",
     "utilities.apps.UtilitiesConfig",
+    "objections.apps.ObjectionsConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware", # Whitenoise
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # Whitenoise
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -254,7 +254,7 @@ RECAPTCHA_PRIVATE_KEY = env("RECAPTCHA_PRIVATE_KEY")
 
 # Auto Logout
 AUTO_LOGOUT = {
-    "IDLE_TIME": timedelta(minutes=1),
+    "IDLE_TIME": timedelta(minutes=45),
     "MESSAGE": "The session has expired. Please login again to  continue.",
     "REDIRECT_TO_LOGIN_IMMEDIATELY": True,
 }
@@ -262,10 +262,10 @@ AUTO_LOGOUT = {
 GRAPPELLI_ADMIN_TITLE = "Energy Portfolio Contract Management"
 
 # axes configuration settings
-AXES_FAILURE_LIMIT=3 # How many times a user can fail to log in
-AXES_COOLOFF_TIME = timedelta(minutes=10) # How long before a user can fail to log in
+AXES_FAILURE_LIMIT = 3  # How many times a user can fail to log in
+AXES_COOLOFF_TIME = timedelta(minutes=10)  # How long before a user can fail to log in
 AXES_LOCK_OUT_BY_COMBINATION_USER_AND_IP = True
 # AXES_ONLY_USER_FAILURES=True # Block only on username
-AXES_RESET_ON_SUCCESS = True # Reset failed login attempts after successful login
-AXES_LOCKOUT_TEMPLATE = 'account_locked.html'
+AXES_RESET_ON_SUCCESS = True  # Reset failed login attempts after successful login
+AXES_LOCKOUT_TEMPLATE = "account_locked.html"
 AXES_RESET_COOL_OFF_ON_FAILURE_DURING_LOCKOUT = False

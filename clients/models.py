@@ -17,15 +17,17 @@ class ClientsManager(models.Manager):
 
 
 class Client(TimeStampedModel):
-    client = models.CharField(max_length=255, unique=True)
+    client = models.CharField(verbose_name="Client", max_length=255, unique=True)
     account_manager = models.ForeignKey(
         AccountManager,
         on_delete=models.CASCADE,
+        verbose_name="Account Manager",
         related_name="account_manager_clients",
     )
     client_manager = models.ForeignKey(
         ClientManager,
         on_delete=models.CASCADE,
+        verbose_name="Client Manager",
         null=True,
         blank=True,
         related_name="client_manager_clients",

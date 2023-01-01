@@ -35,9 +35,7 @@
             <p>Days Left On Contract: {{ contract.days_till }}
             </p>
         {% endif %}
-        {% if contract.under_objection == True %}
-          <p>{% trans "Contract Under Objection: Yes" %}</p>
-        {% endif %}
+
       </div>
       <div class="col">
         {% if contract.smart_meter == None %}

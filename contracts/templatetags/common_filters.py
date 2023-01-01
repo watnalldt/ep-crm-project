@@ -4,6 +4,7 @@ from django import template
 from django.db.models import Count, Q, Sum
 
 from contracts.models import Contract
+from objections.models import Objection
 
 register = template.Library()
 
@@ -64,8 +65,16 @@ def total_directors_approval_contracts():
 
 
 @register.simple_tag
-def total_under_objection_contracts():
-    return Contract.objects.filter(under_objection=True).count()
+def total_under_objection_outstanding_contracts():
+    return Objection.objects.filter(objection_status="OUTSTANDING").count()
+
+
+@register.simple_tag
+def total_value_under_objection_outstanding_contracts():
+    total = Objection.objects.filter(objection_status="OUTSTANDING").aggregate(
+        TOTAL=Sum("eac")
+    )["TOTAL"]
+    return total
 
 
 @register.simple_tag
@@ -81,6 +90,14 @@ def total_non_seamless_contracts():
 @register.simple_tag
 def total_contract_value():
     total = Contract.objects.aggregate(TOTAL=Sum("contract_value"))["TOTAL"]
+    return total
+
+
+@register.simple_tag
+def total_contract_eac_value():
+    total = Contract.objects.filter(utility__utility="Electricity").aggregate(
+        TOTAL=Sum("eac")
+    )["TOTAL"]
     return total
 
 
