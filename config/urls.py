@@ -35,6 +35,7 @@ urlpatterns = [
     path("client_managers/", include("client_managers.urls")),
     path("clients/", include("clients.urls")),
     path("contracts/", include("contracts.urls")),
+    path("objections/", include("objections.urls")),
     # Password Management
     path("password_reset", views.password_reset_request, name="password_reset"),
     path(

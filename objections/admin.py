@@ -1,9 +1,10 @@
 from django.contrib import admin
-from clients.models import Client
-from utilities.models import Supplier
 from import_export import fields, resources
 from import_export.admin import ImportExportModelAdmin
 from import_export.widgets import ForeignKeyWidget
+
+from clients.models import Client
+from utilities.models import Supplier
 
 from .models import Objection
 
@@ -39,8 +40,24 @@ class ObjectionAdmin(ImportExportModelAdmin):
     show_full_result_count = False
     resource_class = ObjectionResource
     list_select_related = ("client",)
-    list_display = ("client", "objection_status", "mpan_mpr", "objecting_supplier", "new_supplier", "registration_date", "objection_date", "deadline_date", "eac")
-    list_filter = ("client", "objection_status", "objecting_supplier", "new_supplier", "is_directors_approval")
+    list_display = (
+        "client",
+        "objection_status",
+        "mpan_mpr",
+        "objecting_supplier",
+        "new_supplier",
+        "registration_date",
+        "objection_date",
+        "deadline_date",
+        "eac",
+    )
+    list_filter = (
+        "client",
+        "objection_status",
+        "objecting_supplier",
+        "new_supplier",
+        "is_directors_approval",
+    )
     autocomplete_fields = [
         "client",
         "objecting_supplier",
@@ -49,17 +66,17 @@ class ObjectionAdmin(ImportExportModelAdmin):
     search_fields = (
         "client__client",
         "mpan_mpr",
-
     )
-    actions = ['objection_status_pending', 'objection_status_resolved']
+    # Change Objection Status Management Commands
+    actions = ["objection_status_pending", "objection_status_resolved"]
 
-    @admin.action(description='Objection Status Pending')
+    @admin.action(description="Objection Status Pending")
     def objection_status_pending(self, request, queryset):
-        queryset.update(objection_status='PENDING')
+        queryset.update(objection_status="PENDING")
 
-    @admin.action(description='Objection Status Resolved')
+    @admin.action(description="Objection Status Resolved")
     def objection_status_resolved(self, request, queryset):
-        queryset.update(objection_status='RESOLVED')
+        queryset.update(objection_status="RESOLVED")
 
 
 admin.site.register(Objection, ObjectionAdmin)

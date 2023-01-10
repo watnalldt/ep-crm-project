@@ -246,7 +246,7 @@ class Contract(TimeStampedModel):
         ]
         verbose_name = _("Client Contract")
         verbose_name_plural = _("Client Contracts")
-        ordering = ["id"]
+        ordering = ["client"]
 
     objects = ContractsManager()
 

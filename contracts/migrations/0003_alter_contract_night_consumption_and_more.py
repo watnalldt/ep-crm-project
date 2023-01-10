@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('contracts', '0002_alter_contract_night_consumption_and_more'),
+        ("contracts", "0002_alter_contract_night_consumption_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='contract',
-            name='night_consumption',
+            model_name="contract",
+            name="night_consumption",
             field=models.FloatField(blank=True, null=True),
         ),
         migrations.AlterField(
-            model_name='historicalcontract',
-            name='night_consumption',
+            model_name="historicalcontract",
+            name="night_consumption",
             field=models.FloatField(blank=True, null=True),
         ),
     ]

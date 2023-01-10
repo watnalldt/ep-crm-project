@@ -14,6 +14,7 @@ from xhtml2pdf import pisa
 from clients.forms import MeterForm
 from contracts.models import Contract
 from core.views import HTMLTitleMixin
+from objections.models import Objection
 
 from .models import Client
 
@@ -143,3 +144,18 @@ def meter_reading(request, *args, **kwargs):
         "client_managers/meter_reading.html",
         {"form": form, "contract": contract},
     )
+
+
+# @method_decorator([never_cache], name="dispatch")
+# class ObjectionDetailView(LoginRequiredMixin, HTMLTitleMixin, DetailView):
+#     model = Objection
+#     template_name = "clients/contracts/objection_detail.html"
+#     login_url = "/users/login/"
+#
+#     def get_html_title(self):
+#         return self.object.business_name
+#
+#     def get_queryset(self):
+#         return Objection.objects.filter(
+#             client__account_manager__account_manager=self.request.user
+#         )

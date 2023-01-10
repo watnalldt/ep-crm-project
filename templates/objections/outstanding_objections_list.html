@@ -1,0 +1,75 @@
+{% extends '_partials/dashboards/portal_dashboard_base.html' %}
+{% load static i18n %}
+{% load common_filters %}
+
+{% block content %}
+  <br>
+  <h6 class="text-center"> <strong>Contracts Under Objection Outstanding: {% total_under_objection_outstanding_contracts %}</strong></h6>
+  <hr>
+  <br>
+
+  <div class="container">
+    <table class="table-striped" id="directors_approval" style="width:100%; margin-bottom:30px;">
+      <thead class="table-success table-striped" style="text-align: center;">
+        <tr>
+          <th>Client</th>
+          <th>Objecting Supplier</th>
+          <th>New Supplier</th>
+          <th>MPAN/MPR</th>
+          <th>Registration Date</th>
+          <th>Objection Date</th>
+          <th>Deadline Date</th>
+          <th>Potential Start Date</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for objection in objections %}
+          <tr>
+            <td>{{ objection.client }}</td>
+            <td>{{ objection.objecting_supplier }}</td>
+            <td>{{ objection.new_supplier }}</td>
+            <td>{{ objection.mpan_mpr }}</td>
+            <td>{{ objection.registration_date }}</td>
+            <td>{{ objection.objection_date }}</td>
+            <td>{{ objection.deadline_date }}</td>
+            <td>{{ objection.potential_start_date }}</td>
+            <td><a href="{% url 'objections:objections_outstanding_detail' objection.id %}" class="btn btn-success text-center"><i class="fa-solid fa-plus"></i></a></td>
+
+          </tr>
+
+        {% endfor %}
+      </tbody>
+
+    </table>
+    <br>
+  </div>
+
+
+{% endblock content %}
+
+{% block extra_js %}
+  <script>
+    $(document).ready(function() {
+      $('#directors_approval').DataTable(
+        {
+          "dom": '<"dt-buttons"Bf><"clear">lirtp',
+          "paging": true,
+          "autoWidth": true,
+          "columnDefs": [
+            { "orderable": false, "targets": 6 }
+          ],
+          "buttons": [
+            'colvis',
+            'copyHtml5',
+            'csvHtml5',
+            'excelHtml5',
+            'pdfHtml5',
+            'print'
+          ]
+        });
+    });
+
+  </script>
+{% endblock extra_js %}

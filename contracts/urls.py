@@ -5,7 +5,11 @@ from . import views
 app_name = "contracts"
 
 urlpatterns = [
-    path("", views.ContractDashboard.as_view(), name="contract_dashboard"),
+    path(
+        "managers_dashboard",
+        views.ManagersDashboard.as_view(),
+        name="managers_dashboard",
+    ),
     path("all_contracts", views.ContractListView.as_view(), name="all_contracts"),
     path(
         "directors_approval_list",
@@ -16,5 +20,10 @@ urlpatterns = [
         "directors_approval_detail/<pk>",
         views.DirectorsApprovalDetail.as_view(),
         name="directors_approval_detail",
+    ),
+    path(
+        "out_of_contract_list",
+        views.OutOfContractList.as_view(),
+        name="out_of_contract_list",
     ),
 ]

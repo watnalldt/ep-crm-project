@@ -1,0 +1,28 @@
+{% extends '_partials/dashboards/portal_dashboard_base.html' %}
+{% load static i18n %}
+{% block html_title %} {{ html_title }} {% endblock html_title %}
+
+{% block content %}
+
+  <h5 class="text-center mt-3">Objections Outstanding:&nbsp{{ objection.client }}</h5>
+  <hr>
+
+  <div class="container">
+  <div class="row">
+    <div class="col-md-12 ">
+      <p>Objecting Supplier:{{ objection.objecting_supplier }}</p>
+      <p>New Supplier: {{ objection.new_supplier }}</p>
+      <p>Account Number: {{ objection.account_number }}</p>
+      <p>Business Name: {{ objection.business_name }}</p>
+      <p>Site Address:{{ objection.site_address }}</p>
+      <p>MPAN/MPR:{{ objection.mpan_mpr }}</p>
+      <p>Registration Date:{{ objection.registration_date }}</p>
+      <p>Objection Date: {{ objection.objection_date }}</p>
+      <p>Deadline Date:{{ objection.deadline_date  }}</p>
+      <p>Potential Start Date:{{ objection.potential_start_date }}</p>
+      <p>EAC: {{ objection.eac }}</p>
+    </div>
+  </div>
+
+  </div>
+{% endblock %}

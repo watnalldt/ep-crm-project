@@ -165,3 +165,7 @@ footer a.hover { color: #8ebf42;}
     border: 1px solid #6c757d;
     box-shadow: none;
 }
+
+.stats{
+    color: green;
+}

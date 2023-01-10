@@ -273,7 +273,7 @@ class ContractAdmin(ImportExportModelAdmin):
         "site_address",
         "id",
     )
-    ordering = ["id"]
+    ordering = ["client"]
     date_hierarchy = "contract_end_date"
 
 

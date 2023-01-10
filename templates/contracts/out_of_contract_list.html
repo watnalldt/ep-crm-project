@@ -1,0 +1,74 @@
+{% extends '_partials/dashboards/portal_dashboard_base.html' %}
+{% load static i18n %}
+{% load common_filters %}
+
+{% block content %}
+  <br>
+  <h6 class="text-center"> <strong>Out of Contract: {% total_ooc_contracts %}</strong></h6>
+  <hr>
+  <br>
+
+  <div class="container">
+    <table class="display" id="directors_approval" style="width:100%; margin-bottom:30px;">
+      <thead class="table-success" style="text-align: center;">
+        <tr>
+          <th>Client</th>
+          <th>Business Name</th>
+          <th>Site Address</th>
+          <th>MPAN/MPR</th>
+          <th>Supplier</th>
+          <th>Utility</th>
+          <th>CED</th>
+          <th>View</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for contract in contracts  %}
+
+          <tr>
+            <td>{{ contract.client | truncatechars:20 }}</td>
+            <td>{{ contract.business_name | title | truncatechars:20 }}</td>
+            <td>{{ contract.site_address | truncatechars:20 }}</td>
+            <td>{{ contract.mpan_mpr}}</td>
+            <td>{{ contract.supplier }}</td>
+            <td>{{ contract.utility }}</td>
+            {% if contract.is_ooc %}
+              <td>{% trans "Out of Contract" %}</td>
+            {% else %}
+              <td>{{ contract.contract_end_date }} </td>
+            {% endif %}
+            <td><a href="{% url 'contracts:directors_approval_detail' contract.id %}" class="btn btn-success text-center"><i class="fa-solid fa-plus"></i></a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+
+    </table>
+  </div>
+
+
+{% endblock content %}
+
+{% block extra_js %}
+  <script>
+    $(document).ready(function() {
+      $('#directors_approval').DataTable(
+        {
+          "dom": '<"dt-buttons"Bf><"clear">lirtp',
+          "paging": true,
+          "autoWidth": true,
+          "columnDefs": [
+            { "orderable": false, "targets": 6 }
+          ],
+          "buttons": [
+            'colvis',
+            'copyHtml5',
+            'csvHtml5',
+            'excelHtml5',
+            'pdfHtml5',
+            'print'
+          ]
+        });
+    });
+
+  </script>
+{% endblock extra_js %}
